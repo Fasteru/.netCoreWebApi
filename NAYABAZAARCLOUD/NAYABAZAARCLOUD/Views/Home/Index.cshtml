@@ -1,0 +1,33 @@
+﻿@model IEnumerable < NAYABAZAARCLOUD.Models.Products >
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <table>
+        <tr>
+            
+            <th>@Html.DisplayNameFor(model => model.ProductName)</th>
+            <th>@Html.DisplayNameFor(model => model.Price)</th>
+            
+            @foreach (var items in Model)
+                {
+                    <tr>
+                        <td>@items.ProductName</td>
+                        <td>@items.Price</td>
+                    </tr>
+                }
+        </tr>
+
+
+    </table>
+   
+</body>
+</html>
