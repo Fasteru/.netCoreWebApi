@@ -1,6 +1,8 @@
-﻿using NAYABAZAARCLOUD.Models;
+﻿using Microsoft.Extensions.Configuration;
+using NAYABAZAARCLOUD.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -9,19 +11,18 @@ namespace NAYABAZAARCLOUD.Services
 {
     public class ProductRepository
     {
-        private static string db_source = "nayabazaar.database.windows.net";
-        private static string db_user = "Arslaan123";
-        private static string db_password = "123Arslaank@";
-        private static string db_database = "nayabazaar";
+        private readonly IConfiguration _configuration;
+
+        public ProductRepository(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
 
         private SqlConnection GetConnection()
         {
-            var _builder = new SqlConnectionStringBuilder();
-            _builder.DataSource = db_source;
-            _builder.UserID = db_user;
-            _builder.Password = db_password;
-            _builder.InitialCatalog = db_database;
-            return new SqlConnection(_builder.ConnectionString);
+           
+            return new SqlConnection(_configuration.GetConnectionString("SqlConnection"));
         }
 
         public List<Products> GetProducts()
